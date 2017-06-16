@@ -11,6 +11,7 @@ import java.util.ConcurrentModificationException;
  * TODO:
  * - SOUND
  * - DROP TICKS IF TOO FAR BEHIND
+ * - Documentation!!!!!
  */
 public abstract class AnimationHandler implements Runnable {
 	private AnimationEngine engine;
