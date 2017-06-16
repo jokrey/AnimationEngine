@@ -1,8 +1,7 @@
-package util.animation.swing.pipeline;
+package util.animation.implementations.swing.pipeline;
 
 import util.animation.pipeline.AnimationDrawer;
-import util.animation.pipeline.AnimationPipeline;
-import util.animation.swing.display.AnimationJPanel;
+import util.animation.implementations.swing.display.AnimationJPanel;
 import util.animation.util.AEColor;
 import util.animation.util.AEPoint;
 import util.animation.util.AERect;
@@ -11,7 +10,6 @@ import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 import java.awt.geom.Arc2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class AnimationDrawerSwing extends AnimationDrawer {

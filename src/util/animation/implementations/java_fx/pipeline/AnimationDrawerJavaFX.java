@@ -1,4 +1,4 @@
-package util.animation.java_fx.pipeline;
+package util.animation.implementations.java_fx.pipeline;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.VPos;
@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-import util.animation.java_fx.display.AnimationCanvas;
+import util.animation.implementations.java_fx.display.AnimationCanvas;
 import util.animation.pipeline.AnimationDrawer;
 import util.animation.util.AEColor;
 import util.animation.util.AEPoint;

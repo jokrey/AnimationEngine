@@ -1,9 +1,8 @@
-package util.animation.swing.display;
+package util.animation.implementations.swing.display;
 
 import util.animation.engine.AnimationEngine;
-import util.animation.java_fx.pipeline.AnimationDrawerJavaFX;
 import util.animation.pipeline.AnimationPipeline;
-import util.animation.swing.pipeline.AnimationDrawerSwing;
+import util.animation.implementations.swing.pipeline.AnimationDrawerSwing;
 
 import javax.swing.*;
 import java.awt.*;

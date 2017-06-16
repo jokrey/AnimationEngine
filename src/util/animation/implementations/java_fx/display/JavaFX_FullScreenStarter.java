@@ -1,4 +1,4 @@
-package util.animation.java_fx.display;
+package util.animation.implementations.java_fx.display;
 
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
@@ -8,7 +8,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import util.animation.engine.AnimationEngine;
-import util.animation.java_fx.pipeline.AnimationDrawerJavaFX;
+import util.animation.implementations.java_fx.pipeline.AnimationDrawerJavaFX;
 import util.animation.pipeline.AnimationPipeline;
 
 import java.awt.*;

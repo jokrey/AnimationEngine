@@ -1,4 +1,4 @@
-package util.animation.android.display;
+package util.animation.implementations.android.display;
 
 class AnimationView{}//remove just to disable error display outside of android sdk knowing env
 //import android.content.Context;
@@ -8,7 +8,7 @@ class AnimationView{}//remove just to disable error display outside of android s
 //import android.view.View;
 //
 //import util.animation.AnimationHandler;
-//import util.animation.android.pipeline.AnimationDrawerAndroid;
+//import util.animation.implementations.android.pipeline.AnimationDrawerAndroid;
 //import util.animation.engine.AnimationEngine;
 //import util.animation.pipeline.AnimationObject;
 //import util.animation.pipeline.AnimationPipeline;

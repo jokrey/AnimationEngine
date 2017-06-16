@@ -1,4 +1,4 @@
-package util.animation.android.pipeline;
+package util.animation.implementations.android.pipeline;
 
 class AnimationDrawerAndroid{} //remove, just for no errors
 //import android.graphics.Bitmap;
@@ -6,7 +6,7 @@ class AnimationDrawerAndroid{} //remove, just for no errors
 //import android.graphics.Paint;
 //import android.graphics.RectF;
 //
-//import util.animation.android.display.AnimationView;
+//import util.animation.implementations.android.display.AnimationView;
 //import util.animation.pipeline.AnimationDrawer;
 //import util.animation.util.AEColor;
 //import util.animation.util.AEPoint;
