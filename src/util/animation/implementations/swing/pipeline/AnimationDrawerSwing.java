@@ -1,7 +1,7 @@
 package util.animation.implementations.swing.pipeline;
 
-import util.animation.pipeline.AnimationDrawer;
 import util.animation.implementations.swing.display.AnimationJPanel;
+import util.animation.pipeline.AnimationDrawer;
 import util.animation.util.AEColor;
 import util.animation.util.AEPoint;
 import util.animation.util.AERect;

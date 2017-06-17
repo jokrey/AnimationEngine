@@ -1,8 +1,8 @@
 package util.animation.implementations.swing.display;
 
 import util.animation.engine.AnimationEngine;
-import util.animation.pipeline.AnimationPipeline;
 import util.animation.implementations.swing.pipeline.AnimationDrawerSwing;
+import util.animation.pipeline.AnimationPipeline;
 
 import javax.swing.*;
 import java.awt.*;
