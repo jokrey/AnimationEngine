@@ -77,7 +77,7 @@ public abstract class AnimationEngine {
 	public final int getVirtualLimit_height() {return (int) getVirtualBoundaries().getHeight();}
 	public final int getLimitPerc_W(double percentage) {return (int) (getVirtualLimit_width()*(percentage/100));}
 	public final int getLimitPerc_H(double percentage) {return (int) (getVirtualLimit_height()*(percentage/100));}
-    public final static int getTicksPerSecond() {return 100;}
+    public final int getTicksPerSecond() {return 100;}
     public double getInitialPixelsPerBox() {return -1;}
     public AEPoint getDrawerMidOverride(){return null;}
     public void mouseClicked(int mouseCode) {}
