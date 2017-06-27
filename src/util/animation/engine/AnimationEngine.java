@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public abstract class AnimationEngine {
+public abstract class AnimationEngine extends HandelableEngine {
 //	private CopyOnWriteArrayList<AnimationObject> objects = Collections.synchronizedList(new ArrayList<AnimationObject>());
 	private CopyOnWriteArrayList<AnimationObject> objects = new CopyOnWriteArrayList<>();
 	public final AnimationObject getObjectAt(int index) {
@@ -46,38 +46,12 @@ public abstract class AnimationEngine {
 		return getAllObjects();
 	}
 
-    private long last = System.nanoTime();
-    public final void calculate() {
-        if(isPaused()) {
-            last = System.nanoTime();
-            return;
-        }
-        long newLast = System.nanoTime();
-        if(calculate((newLast - last)/1e9))
-            last = newLast;
-    }
-    private final boolean calculate(double delta) {
-    	double tickEvery = 1.0/getTicksPerSecond();
-    	if(delta > tickEvery) {
-	    	do {
-	    		calculateTick();
-	    		delta-=tickEvery;
-//				System.out.println("calculated");
-	    	} while(delta > tickEvery);
-	    	return true;
-    	}
-    	return false;
-    }
-    protected abstract void calculateTick();
-
-	public abstract void initiate();
 	public abstract AESize getVirtualBoundaries();
 
 	public final int getVirtualLimit_width() {return (int) getVirtualBoundaries().getWidth();}
 	public final int getVirtualLimit_height() {return (int) getVirtualBoundaries().getHeight();}
 	public final int getLimitPerc_W(double percentage) {return (int) (getVirtualLimit_width()*(percentage/100));}
 	public final int getLimitPerc_H(double percentage) {return (int) (getVirtualLimit_height()*(percentage/100));}
-    public final int getTicksPerSecond() {return 100;}
     public double getInitialPixelsPerBox() {return -1;}
     public AEPoint getDrawerMidOverride(){return null;}
     public void mouseClicked(int mouseCode) {}
@@ -92,17 +66,6 @@ public abstract class AnimationEngine {
     }
     public boolean isKeyPressed(char keyChar) {
         return pressedKeys.contains(keyChar);
-    }
-
-    private boolean isPaused = true;
-    public final boolean isPaused() {
-        return isPaused;
-    }
-    public final void start() {
-        isPaused = false;
-    }
-    public final void pause() {
-        isPaused = true;
     }
 
 //	private ArrayList<Integer> pressedKeys = new ArrayList<>();

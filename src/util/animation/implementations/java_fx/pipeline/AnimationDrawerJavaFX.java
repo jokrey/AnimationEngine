@@ -4,6 +4,8 @@ import javafx.geometry.Bounds;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
@@ -11,8 +13,11 @@ import javafx.scene.text.TextAlignment;
 import util.animation.implementations.java_fx.display.AnimationCanvas;
 import util.animation.pipeline.AnimationDrawer;
 import util.animation.util.AEColor;
+import util.animation.util.AEImage;
 import util.animation.util.AEPoint;
 import util.animation.util.AERect;
+
+import java.awt.image.PixelGrabber;
 
 public class AnimationDrawerJavaFX extends AnimationDrawer {
 	public AnimationCanvas p=null;
@@ -30,10 +35,19 @@ public class AnimationDrawerJavaFX extends AnimationDrawer {
 	}
 
 
-    @Override public void drawImage(Object param, AERect drawB) {
+    @Override public void drawImage(AEImage param, AERect drawB) {
+        //TODO: I assume this is slow as -------
+        int w = param.getData().length;
+        int h = param.getData()[0].length;
+        WritableImage image = new WritableImage(w, h);
+        PixelWriter pw = image.getPixelWriter();
+        for(int x=0;x<w;x++)
+            for(int y=0;y<h;y++)
+                pw.setArgb(x,y,param.getData()[x][y]);
+
+
         GraphicsContext gc = p.getGraphicsContext2D();
-		Image ip_img = (Image) param;
-        gc.drawImage(ip_img, drawB.x, drawB.y, drawB.getWidth(), drawB.getHeight());//scaled drawing not tested...
+        gc.drawImage(image, drawB.x, drawB.y, drawB.getWidth(), drawB.getHeight());//scaled drawing not tested...
     }
 
     @Override public void drawLine(AEColor param, AEPoint p1, AEPoint p2) {

@@ -3,6 +3,7 @@ package util.animation.implementations.swing.pipeline;
 import util.animation.implementations.swing.display.AnimationJPanel;
 import util.animation.pipeline.AnimationDrawer;
 import util.animation.util.AEColor;
+import util.animation.util.AEImage;
 import util.animation.util.AEPoint;
 import util.animation.util.AERect;
 
@@ -11,6 +12,7 @@ import java.awt.font.FontRenderContext;
 import java.awt.font.LineMetrics;
 import java.awt.geom.Arc2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 public class AnimationDrawerSwing extends AnimationDrawer {
 	public AnimationJPanel p=null;
@@ -20,8 +22,14 @@ public class AnimationDrawerSwing extends AnimationDrawer {
     }
 
 
-    @Override public void drawImage(Object param, AERect drawB) {
-        BufferedImage ip_img = (BufferedImage) param;
+    @Override public void drawImage(AEImage param, AERect drawB) {
+        int w = param.getData().length;
+        int h = param.getData()[0].length;
+        BufferedImage ip_img = new BufferedImage( w, h, BufferedImage.TYPE_INT_ARGB );
+        final int[] a = ( (DataBufferInt) ip_img.getRaster().getDataBuffer() ).getData();
+        for(int i=0;i<w;i++)
+            System.arraycopy(i * param.getData()[0].length, 0, a, 0, param.getData()[0].length);
+
         p.getLastGraphics().drawImage(ip_img, (int)drawB.x, (int)drawB.y, (int)(drawB.x+drawB.getWidth()), (int)(drawB.y+drawB.getHeight()),
                 0, 0, ip_img.getWidth(), ip_img.getHeight(), null);
     }

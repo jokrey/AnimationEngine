@@ -1,6 +1,7 @@
 package util.animation.pipeline;
 
 import util.animation.util.AEColor;
+import util.animation.util.AEImage;
 import util.animation.util.AEPoint;
 import util.animation.util.AERect;
 
@@ -16,10 +17,10 @@ public abstract class AnimationDrawer {
     public abstract void drawHalfOval(AEColor colorToDraw, AERect aeRect, int openDirection);
     public abstract void fillHalfOval(AEColor colorToDraw, AERect aeRect, int openDirection);
     public abstract void fillTriangle(AEColor colorToDraw, AERect aeRect);
-    public abstract void drawImage(Object param, AERect drawB);
     // returns height of drawn string..
     public abstract double drawString(AEColor clr, double font_size, String str, double mid_x, double mid_y);
     public abstract void drawString(AEColor clr, String str, AERect rect);
+    public abstract void drawImage(AEImage toDrawer, AERect drawB);
 
 
 //	public int getVisibleW() {
