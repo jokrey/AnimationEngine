@@ -29,9 +29,10 @@ public class AnimationDrawerSwing extends AnimationDrawer {
         final int[] a = ( (DataBufferInt) ip_img.getRaster().getDataBuffer() ).getData();
         for(int i=0;i<w;i++)
             System.arraycopy(i * param.getData()[0].length, 0, a, 0, param.getData()[0].length);
-
-        p.getLastGraphics().drawImage(ip_img, (int)drawB.x, (int)drawB.y, (int)(drawB.x+drawB.getWidth()), (int)(drawB.y+drawB.getHeight()),
-                0, 0, ip_img.getWidth(), ip_img.getHeight(), null);
+    }
+    public void drawImage(BufferedImage image, AERect drawB) {
+        p.getLastGraphics().drawImage(image, (int)drawB.x, (int)drawB.y, (int)(drawB.x+drawB.getWidth()), (int)(drawB.y+drawB.getHeight()),
+                0, 0, image.getWidth(), image.getHeight(), null);
     }
 
     @Override public void drawLine(AEColor param, AEPoint p1, AEPoint p2) {

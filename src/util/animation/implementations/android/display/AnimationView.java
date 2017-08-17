@@ -7,12 +7,12 @@ class AnimationView{}//remove just to disable error display outside of android s
 //import android.view.MotionEvent;
 //import android.view.View;
 //
-//import util.animation.AnimationHandler;
-//import util.animation.implementations.android.pipeline.AnimationDrawerAndroid;
-//import util.animation.engine.AnimationEngine;
-//import util.animation.pipeline.AnimationObject;
-//import util.animation.pipeline.AnimationPipeline;
-//import util.animation.util.AEPoint;
+//import neural_network.abstract_logic.animation.AnimationHandler;
+//import neural_network.abstract_logic.animation.implementations.android.pipeline.AnimationDrawerAndroid;
+//import neural_network.abstract_logic.animation.engine.AnimationEngine;
+//import neural_network.abstract_logic.animation.pipeline.AnimationObject;
+//import neural_network.abstract_logic.animation.pipeline.AnimationPipeline;
+//import neural_network.abstract_logic.animation.neural_network.abstract_logic.AEPoint;
 //
 //public class AnimationView extends View {
 //	public AnimationHandler handler;

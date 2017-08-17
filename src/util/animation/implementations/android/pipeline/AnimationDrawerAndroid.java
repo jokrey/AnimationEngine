@@ -6,11 +6,11 @@ class AnimationDrawerAndroid{} //remove, just for no errors
 //import android.graphics.Paint;
 //import android.graphics.RectF;
 //
-//import util.animation.implementations.android.display.AnimationView;
-//import util.animation.pipeline.AnimationDrawer;
-//import util.animation.util.AEColor;
-//import util.animation.util.AEPoint;
-//import util.animation.util.AERect;
+//import neural_network.abstract_logic.animation.implementations.android.display.AnimationView;
+//import neural_network.abstract_logic.animation.pipeline.AnimationDrawer;
+//import neural_network.abstract_logic.animation.neural_network.abstract_logic.AEColor;
+//import neural_network.abstract_logic.animation.neural_network.abstract_logic.AEPoint;
+//import neural_network.abstract_logic.animation.neural_network.abstract_logic.AERect;
 //
 //public class AnimationDrawerAndroid extends AnimationDrawer {
 //	public AnimationView p=null;

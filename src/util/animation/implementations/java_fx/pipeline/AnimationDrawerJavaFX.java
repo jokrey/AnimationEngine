@@ -3,7 +3,6 @@ package util.animation.implementations.java_fx.pipeline;
 import javafx.geometry.Bounds;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
@@ -16,8 +15,6 @@ import util.animation.util.AEColor;
 import util.animation.util.AEImage;
 import util.animation.util.AEPoint;
 import util.animation.util.AERect;
-
-import java.awt.image.PixelGrabber;
 
 public class AnimationDrawerJavaFX extends AnimationDrawer {
 	public AnimationCanvas p=null;
