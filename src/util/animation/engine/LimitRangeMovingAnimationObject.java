@@ -1,9 +1,9 @@
 package util.animation.engine;
 
-import util.animation.pipeline.AnimationObject;
 import util.animation.util.AEColor;
 import util.animation.util.AEPoint;
 import util.animation.util.AESize;
+import util.animation.pipeline.AnimationObject;
 import util.animation.util.AE_UTIL;
 
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
 package util.animation.implementations.swing.pipeline;
 
 import util.animation.implementations.swing.display.AnimationJPanel;
-import util.animation.pipeline.AnimationDrawer;
 import util.animation.util.AEColor;
+import util.animation.util.AERect;
+import util.animation.pipeline.AnimationDrawer;
 import util.animation.util.AEImage;
 import util.animation.util.AEPoint;
-import util.animation.util.AERect;
 
 import java.awt.*;
 import java.awt.font.FontRenderContext;

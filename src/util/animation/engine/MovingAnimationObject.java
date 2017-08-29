@@ -1,8 +1,8 @@
 package util.animation.engine;
 
+import util.animation.util.AEVector;
 import util.animation.pipeline.AnimationObject;
 import util.animation.util.AERect;
-import util.animation.util.AEVector;
 import util.animation.util.AE_UTIL;
 
 import java.util.List;

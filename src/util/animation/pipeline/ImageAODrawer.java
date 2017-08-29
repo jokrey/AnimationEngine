@@ -1,8 +1,8 @@
 package util.animation.pipeline;
 
 import util.animation.util.AEColor;
-import util.animation.util.AEImage;
 import util.animation.util.AERect;
+import util.animation.util.AEImage;
 
 /**
  * TODO: This entire class is useless as is. But may be interesting in the future.

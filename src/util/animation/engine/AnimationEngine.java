@@ -1,8 +1,8 @@
 package util.animation.engine;
 
-import util.animation.pipeline.AnimationObject;
 import util.animation.util.AEPoint;
 import util.animation.util.AESize;
+import util.animation.pipeline.AnimationObject;
 
 import java.util.ArrayList;
 import java.util.List;

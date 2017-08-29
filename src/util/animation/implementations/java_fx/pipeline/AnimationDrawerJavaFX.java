@@ -10,11 +10,11 @@ import javafx.scene.shape.ArcType;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import util.animation.implementations.java_fx.display.AnimationCanvas;
-import util.animation.pipeline.AnimationDrawer;
 import util.animation.util.AEColor;
+import util.animation.util.AERect;
+import util.animation.pipeline.AnimationDrawer;
 import util.animation.util.AEImage;
 import util.animation.util.AEPoint;
-import util.animation.util.AERect;
 
 public class AnimationDrawerJavaFX extends AnimationDrawer {
 	public AnimationCanvas p=null;

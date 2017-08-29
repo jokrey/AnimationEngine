@@ -2,9 +2,9 @@ package util.animation.pipeline;
 
 import util.animation.engine.AnimationEngine;
 import util.animation.util.AEColor;
-import util.animation.util.AEPoint;
 import util.animation.util.AERect;
 import util.animation.util.AESize;
+import util.animation.util.AEPoint;
 
 import java.util.List;
 

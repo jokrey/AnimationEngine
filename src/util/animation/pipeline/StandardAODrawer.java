@@ -1,8 +1,8 @@
 package util.animation.pipeline;
 
 import util.animation.util.AEColor;
-import util.animation.util.AEPoint;
 import util.animation.util.AERect;
+import util.animation.util.AEPoint;
 
 public class StandardAODrawer extends AnimationObjectDrawer {
 	@Override public boolean canDraw(AnimationObject o, Object param) {

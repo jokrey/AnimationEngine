@@ -5,12 +5,12 @@ import com.sun.javafx.geom.Point2D;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.*;
-import util.animation.AnimationHandler;
 import util.animation.engine.AnimationEngine;
 import util.animation.implementations.java_fx.pipeline.AnimationDrawerJavaFX;
 import util.animation.pipeline.AnimationPipeline;
 import util.animation.util.AEPoint;
 import util.animation.util.AERect;
+import util.animation.AnimationHandler;
 
 import java.awt.*;
 
