@@ -16,10 +16,10 @@ import java.util.ConcurrentModificationException;
 public abstract class AnimationHandler implements Runnable {
 	private AnimationEngine engine;
 	private AnimationPipeline pipeline;
-    public AnimationPipeline getPipeline() {
+	public AnimationPipeline getPipeline() {
 		return pipeline;
 	}
-    public AnimationEngine getEngine() {
+	public AnimationEngine getEngine() {
 		return engine;
 	}
 
@@ -66,7 +66,7 @@ public abstract class AnimationHandler implements Runnable {
 				while(engine!=null) {
 					try {
 						engine.calculate();
-                        sleep(1);
+						sleep(1);
 					} catch(ConcurrentModificationException ex) {
 						System.err.println("concs are boring");
 					} catch(Exception ex) {
@@ -78,24 +78,24 @@ public abstract class AnimationHandler implements Runnable {
 		engine_p.start();
 	}
 
-    @Override public void run() {
-        while(pipeline !=null) {
-            if(getPipeline().canDraw()) {
-                draw();
-            }
-            sleep(1);
-        }
-    }
+	@Override public void run() {
+		while(pipeline !=null) {
+			if(getPipeline().canDraw()) {
+				draw();
+			}
+			sleep(1);
+		}
+	}
 
-    static void sleep(long ms) {
-            try {
-                Thread.sleep(ms);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-    }
+	static void sleep(long ms) {
+		try {
+			Thread.sleep(ms);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public void kill() {
+	public void kill() {
 		engine=null;
 		pipeline =null;
 	}
