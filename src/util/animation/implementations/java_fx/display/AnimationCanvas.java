@@ -15,6 +15,8 @@ import util.animation.AnimationHandler;
 import java.awt.*;
 
 public class AnimationCanvas extends Canvas {
+    private boolean mousePressed = false;
+
 	public AnimationHandler handler;
 	public void start() {
 		handler.start();
@@ -43,8 +45,9 @@ public class AnimationCanvas extends Canvas {
         setFocusTraversable(true);
         setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override public void handle(KeyEvent event) {
-                if(event.getText().length()>=1)
-                    handler.getEngine().keyPressed(event.getText().charAt(0));
+                handler.getEngine().keyPressed(
+                        event.getText().length() < 1 ? 0 : event.getText().charAt(0),
+                        event.getCode().ordinal());
 
                 if (keyComb_strg_x.match(event)) {
                     handler.pause();
@@ -57,8 +60,9 @@ public class AnimationCanvas extends Canvas {
         });
         setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override public void handle(KeyEvent event) {
-                if(event.getText().length()>=1)
-                    handler.getEngine().keyReleased(event.getText().charAt(0));
+                handler.getEngine().keyReleased(
+                        event.getText().length() < 1 ? 0 : event.getText().charAt(0),
+                        event.getCode().ordinal());
             }
         });
 	}
@@ -66,42 +70,50 @@ public class AnimationCanvas extends Canvas {
     Point2D oldXY_OnScreen = new Point2D();
     EventHandler<MouseEvent> mouseDragEventHandler = new EventHandler<MouseEvent>() {
         @Override public void handle(MouseEvent event) {
-            if(event.isPrimaryButtonDown()) {
-                if (handler.getPipeline().userDrawBoundsMidOverride == null) {
-                    AERect drawBnds = handler.getPipeline().getDrawBounds(handler.getEngine());
-                    handler.getPipeline().userDrawBoundsMidOverride = handler.getPipeline().convertFromPixelPoint(new AEPoint(drawBnds.x + drawBnds.getWidth() / 2, drawBnds.y + drawBnds.getHeight() / 2));
+            if(handler.getEngine().isKeyPressed(KeyCode.CONTROL.ordinal())) {
+                if (event.isPrimaryButtonDown()) {
+                    if (handler.getPipeline().userDrawBoundsMidOverride == null) {
+                        AERect drawBnds = handler.getPipeline().getDrawBounds(handler.getEngine());
+                        handler.getPipeline().userDrawBoundsMidOverride = handler.getPipeline().convertFromPixelPoint(new AEPoint(drawBnds.x + drawBnds.getWidth() / 2, drawBnds.y + drawBnds.getHeight() / 2));
+                    }
+                    double xOnScreen_scaled = event.getScreenX();
+                    double yOnScreen_scaled = event.getScreenY();
+                    Point2D convert = new Point2D((float) (xOnScreen_scaled - oldXY_OnScreen.x), (float) (yOnScreen_scaled - oldXY_OnScreen.y));
+                    oldXY_OnScreen.setLocation((float) xOnScreen_scaled, (float) yOnScreen_scaled);
+                    handler.getPipeline().userDrawBoundsMidOverride.setLocation(
+                            handler.getPipeline().userDrawBoundsMidOverride.x - convert.x / handler.getPipeline().squareEqualsPixels,
+                            handler.getPipeline().userDrawBoundsMidOverride.y - convert.y / handler.getPipeline().squareEqualsPixels
+                    );
                 }
-                double xOnScreen_scaled = event.getScreenX();
-                double yOnScreen_scaled = event.getScreenY();
-                Point2D convert = new Point2D((float) (xOnScreen_scaled - oldXY_OnScreen.x), (float) (yOnScreen_scaled - oldXY_OnScreen.y));
-                oldXY_OnScreen.setLocation((float)xOnScreen_scaled, (float) yOnScreen_scaled);
-                handler.getPipeline().userDrawBoundsMidOverride.setLocation(
-                        handler.getPipeline().userDrawBoundsMidOverride.x - convert.x/handler.getPipeline().squareEqualsPixels,
-                        handler.getPipeline().userDrawBoundsMidOverride.y - convert.y/handler.getPipeline().squareEqualsPixels
-                );
             }
         }
     };
     EventHandler<MouseEvent> mousePressedEventHandler = new EventHandler<MouseEvent>() {
         @Override public void handle(MouseEvent event) {
-            oldXY_OnScreen.setLocation((float)event.getScreenX(), (float) event.getScreenY());
-            if(!event.isPrimaryButtonDown()) {
-                handler.getPipeline().resetDrawBounds(handler.getEngine());
-                handler.getPipeline().userDrawBoundsMidOverride = null;
+            mousePressed = true;
+            if(handler.getEngine().isKeyPressed(KeyCode.CONTROL.ordinal())) {
+                oldXY_OnScreen.setLocation((float) event.getScreenX(), (float) event.getScreenY());
+                if (!event.isPrimaryButtonDown()) {
+                    handler.getPipeline().resetDrawBounds(handler.getEngine());
+                    handler.getPipeline().userDrawBoundsMidOverride = null;
+                }
             }
         }
     };
     EventHandler<MouseEvent> mouseClickedEventHandler = new EventHandler<MouseEvent>() {
         @Override public void handle(MouseEvent event) {
             handler.getEngine().mouseClicked(event.getButton().ordinal());
+            mousePressed = false;
         }
     };
     EventHandler<ScrollEvent> mouseScrollEventHandler = new EventHandler<ScrollEvent>() {
         @Override public void handle(ScrollEvent event) {
-            if(event.getDeltaY()>0) {
-                handler.zoomIn();
-            } else if(event.getDeltaY()<0) {
-                handler.zoomOut();
+            if(handler.getEngine().isKeyPressed(KeyCode.CONTROL.ordinal())) {
+                if (event.getDeltaY() > 0) {
+                    handler.zoomIn();
+                } else if (event.getDeltaY() < 0) {
+                    handler.zoomOut();
+                }
             }
         }
     };
@@ -112,7 +124,7 @@ public class AnimationCanvas extends Canvas {
 		if(handler.getPipeline()==null || (!handler.getPipeline().canDraw() && !handler.getEngine().isPaused()))return;
 
         AEPoint mouseP = handler.getPipeline().convertFromScreenPoint(new AEPoint(MouseInfo.getPointerInfo().getLocation().x,MouseInfo.getPointerInfo().getLocation().y));
-        handler.getEngine().locationInputChanged(mouseP);
+        handler.getEngine().locationInputChanged(mouseP, mousePressed);
 		handler.getPipeline().draw(handler.getEngine().getAllObjectsToDraw(), handler.getEngine(), true);
 	}
 }

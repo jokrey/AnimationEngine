@@ -17,11 +17,12 @@ public abstract class TickEngine extends AnimationEngine {
             do {
                 calculateTick();
                 delta-=tickEvery;
-            } while(delta > tickEvery);
+            } while(delta > tickEvery && redoDelayedTicks());
             return true;
         }
         return false;
     }
     protected abstract void calculateTick();
-    public final int getTicksPerSecond() {return 100;}
+    public int getTicksPerSecond() {return 100;}
+    public boolean redoDelayedTicks() {return true;}
 }

@@ -13,6 +13,8 @@ import java.awt.event.*;
 import java.awt.geom.Point2D;
 
 public class AnimationJPanel extends JPanel {
+	private boolean mousePressed = false;
+
 	public AnimationHandler handler;
 	public void start() {
 		handler.start();
@@ -47,30 +49,38 @@ public class AnimationJPanel extends JPanel {
         MouseAdapter ma = new MouseAdapter() {
 			Point oldXY_OnScreen = new Point();
 			@Override public void mouseDragged(MouseEvent e) {
-				if(SwingUtilities.isLeftMouseButton(e)) {
-					if(handler.getPipeline().userDrawBoundsMidOverride==null) {
-						AERect drawBnds = handler.getPipeline().getDrawBounds(handler.getEngine());
-						if(engineToRun.getDrawerMidOverride()==null)
-    						handler.getPipeline().userDrawBoundsMidOverride=handler.getPipeline().convertFromPixelPoint(new AEPoint(drawBnds.x+drawBnds.getWidth()/2, drawBnds.y+drawBnds.getHeight()/2));
-						else
-                            handler.getPipeline().userDrawBoundsMidOverride=engineToRun.getDrawerMidOverride();
-					} else {
-                        double xOnScreen_scaled = e.getXOnScreen();
-                        double yOnScreen_scaled = e.getYOnScreen();
-                        Point2D.Double convert = new Point2D.Double(xOnScreen_scaled - oldXY_OnScreen.x, yOnScreen_scaled - oldXY_OnScreen.y);
-                        oldXY_OnScreen.setLocation(xOnScreen_scaled, yOnScreen_scaled);
-                        handler.getPipeline().userDrawBoundsMidOverride.setLocation(
-                                handler.getPipeline().userDrawBoundsMidOverride.x - convert.x / handler.getPipeline().squareEqualsPixels,
-                                handler.getPipeline().userDrawBoundsMidOverride.y - convert.y / handler.getPipeline().squareEqualsPixels
-                        );
-                    }
-	                //System.out.println(handler.getPipeline().userDrawBoundsMidOverride);
+				if(handler.getEngine().isKeyPressed(KeyEvent.VK_CONTROL)) {
+					if (SwingUtilities.isLeftMouseButton(e)) {
+						if (handler.getPipeline().userDrawBoundsMidOverride == null) {
+							AERect drawBnds = handler.getPipeline().getDrawBounds(handler.getEngine());
+							if (engineToRun.getDrawerMidOverride() == null)
+								handler.getPipeline().userDrawBoundsMidOverride = handler.getPipeline().convertFromPixelPoint(new AEPoint(drawBnds.x + drawBnds.getWidth() / 2, drawBnds.y + drawBnds.getHeight() / 2));
+							else
+								handler.getPipeline().userDrawBoundsMidOverride = engineToRun.getDrawerMidOverride();
+						} else {
+							double xOnScreen_scaled = e.getXOnScreen();
+							double yOnScreen_scaled = e.getYOnScreen();
+							Point2D.Double convert = new Point2D.Double(xOnScreen_scaled - oldXY_OnScreen.x, yOnScreen_scaled - oldXY_OnScreen.y);
+							oldXY_OnScreen.setLocation(xOnScreen_scaled, yOnScreen_scaled);
+							handler.getPipeline().userDrawBoundsMidOverride.setLocation(
+									handler.getPipeline().userDrawBoundsMidOverride.x - convert.x / handler.getPipeline().squareEqualsPixels,
+									handler.getPipeline().userDrawBoundsMidOverride.y - convert.y / handler.getPipeline().squareEqualsPixels
+							);
+						}
+						//System.out.println(handler.getPipeline().userDrawBoundsMidOverride);
+					}
 				}
 			}
 			@Override public void mousePressed(MouseEvent e) {
-				oldXY_OnScreen.setLocation(e.getXOnScreen(), e.getYOnScreen());
-				if(!SwingUtilities.isLeftMouseButton(e))
-					handler.getPipeline().userDrawBoundsMidOverride=null;
+				mousePressed = true;
+                oldXY_OnScreen.setLocation(e.getXOnScreen(), e.getYOnScreen());
+                if(handler.getEngine().isKeyPressed(KeyEvent.VK_CONTROL)) {
+					if (!SwingUtilities.isLeftMouseButton(e))
+						handler.getPipeline().userDrawBoundsMidOverride = null;
+				}
+			}
+			@Override public void mouseReleased(MouseEvent e) {
+				mousePressed = false;
 			}
 
 			@Override public void mouseClicked(MouseEvent me) {
@@ -78,10 +88,12 @@ public class AnimationJPanel extends JPanel {
 				requestFocus();
 			}
 			@Override public void mouseWheelMoved(MouseWheelEvent mwe) {
-				if(mwe.getWheelRotation()<0) {
-					handler.zoomIn();
-				} else if(mwe.getWheelRotation()>0) {
-					handler.zoomOut();
+				if(handler.getEngine().isKeyPressed(KeyEvent.VK_CONTROL)) {
+					if (mwe.getWheelRotation() < 0) {
+						handler.zoomIn();
+					} else if (mwe.getWheelRotation() > 0) {
+						handler.zoomOut();
+					}
 				}
 			}
 		};
@@ -93,11 +105,11 @@ public class AnimationJPanel extends JPanel {
                 synchronized (AnimationJPanel.class) {
                     switch (ke.getID()) {
 	                    case KeyEvent.KEY_PRESSED:
-	                    	handler.getEngine().keyPressed(ke.getKeyChar());
+	                    	handler.getEngine().keyPressed(ke.getKeyChar(), ke.getKeyCode());
 	                        break;
 	                    case KeyEvent.KEY_RELEASED:
 	                    	try {
-		                    	handler.getEngine().keyReleased(ke.getKeyChar());
+		                    	handler.getEngine().keyReleased(ke.getKeyChar(), ke.getKeyCode());
 	                    	} catch(Exception ex) {}
 	                        break;
                     }
@@ -121,7 +133,7 @@ public class AnimationJPanel extends JPanel {
 		super.paintComponent(gg);
 
         AEPoint mouseP = handler.getPipeline().convertFromScreenPoint(new AEPoint(MouseInfo.getPointerInfo().getLocation().x,MouseInfo.getPointerInfo().getLocation().y), handler.getPipeline().getDrawBounds(handler.getEngine()));
-		handler.getEngine().locationInputChanged(mouseP);
+		handler.getEngine().locationInputChanged(mouseP, mousePressed);
 		g = (Graphics2D)gg;
 		handler.getPipeline().draw(handler.getEngine().getAllObjectsToDraw(), handler.getEngine(), true);
 		g = null;

@@ -36,11 +36,11 @@ class AnimationView{}//remove just to disable error display outside of android s
 //                AEPoint mouseP = handler.getPipeline().convertFromScreenPoint(new AEPoint(event.getX(), event.getY()));
 //                if (event.getAction() == MotionEvent.ACTION_UP) {
 //                    handler.getEngine().mouseClicked(0);
-//                    handler.getEngine().locationInputChanged(null);
+//                    handler.getEngine().locationInputChanged(null, true);
 //                } else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-//                    handler.getEngine().locationInputChanged(mouseP);
+//                    handler.getEngine().locationInputChanged(mouseP, true);
 //                } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-//                    handler.getEngine().locationInputChanged(mouseP);
+//                    handler.getEngine().locationInputChanged(mouseP, true);
 //                } else {
 //                    return false;
 //                }

@@ -55,18 +55,24 @@ public abstract class AnimationEngine extends HandelableEngine {
     public double getInitialPixelsPerBox() {return -1;}
     public AEPoint getDrawerMidOverride(){return null;}
     public void mouseClicked(int mouseCode) {}
-	public void locationInputChanged(AEPoint p) {}
+	public void locationInputChanged(AEPoint p, boolean mousePressed) {}
 
-    ArrayList<Character> pressedKeys = new ArrayList<>();
-    public void keyPressed(char keyChar) {
-        if(!pressedKeys.contains(keyChar))	pressedKeys.add(keyChar);
+	ArrayList<Character> pressedKeys = new ArrayList<>();
+	ArrayList<Integer> pressedKeyCodes = new ArrayList<>();
+    public void keyPressed(char keyChar, int key_code) {
+		if(!pressedKeys.contains(keyChar))	pressedKeys.add(keyChar);
+		if(!pressedKeyCodes.contains(key_code))	pressedKeyCodes.add(key_code);
     }
-    public void keyReleased(char keyChar) {
-        pressedKeys.remove(pressedKeys.indexOf(keyChar));
+    public void keyReleased(char keyChar, int key_code) {
+		pressedKeys.remove(pressedKeys.indexOf(keyChar));
+		pressedKeyCodes.remove(pressedKeyCodes.indexOf(key_code));
     }
-    public boolean isKeyPressed(char keyChar) {
-        return pressedKeys.contains(keyChar);
-    }
+	public boolean isKeyPressed(char keyChar) {
+		return pressedKeys.contains(keyChar);
+	}
+	public boolean isKeyPressed(int key_code) {
+		return pressedKeyCodes.contains(key_code);
+	}
 
 //	private ArrayList<Integer> pressedKeys = new ArrayList<>();
 //    public final void setKeyPressed(int key) {

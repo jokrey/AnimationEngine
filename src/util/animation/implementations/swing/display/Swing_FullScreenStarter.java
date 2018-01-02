@@ -9,10 +9,16 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Swing_FullScreenStarter {
-    public static void start(AnimationEngine engineToRun_g) {
-        start(engineToRun_g, new AnimationPipeline(new AnimationDrawerSwing()));
+    public static JFrame start(AnimationEngine engineToRun_g) {
+        return start(engineToRun_g, true);
     }
-	public static void start(AnimationEngine engineToRun, AnimationPipeline pipe_g) {
+    public static JFrame start(AnimationEngine engineToRun_g, boolean immediatlysetvisibletrue) {
+        return start(engineToRun_g, new AnimationPipeline(new AnimationDrawerSwing()), immediatlysetvisibletrue);
+    }
+    public static JFrame start(AnimationEngine engineToRun, AnimationPipeline pipe_g) {
+        return start(engineToRun, pipe_g, true);
+    }
+	public static JFrame start(AnimationEngine engineToRun, AnimationPipeline pipe_g, boolean immediatlysetvisibletrue) {
         if(! (pipe_g.getDrawer() instanceof AnimationDrawerSwing))
             throw new IllegalArgumentException("Swing needs the swing drawer you f***");
 
@@ -20,14 +26,17 @@ public class Swing_FullScreenStarter {
 
 		AnimationJPanel ap = new AnimationJPanel(engineToRun, pipe_g);
 		ap.setBackground(Color.red);
-		f.setContentPane(ap);
+		f.add(ap, BorderLayout.CENTER);
 
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setUndecorated(true);
 		f.setSize(Toolkit.getDefaultToolkit().getScreenSize());
 		centerOnMouseScreen(f);
-		f.setVisible(true);
+		if(immediatlysetvisibletrue)
+    		f.setVisible(true);
 		ap.start();
+
+		return f;
 	}
 
     public static Point centerOnMouseScreen(JFrame frame) {
