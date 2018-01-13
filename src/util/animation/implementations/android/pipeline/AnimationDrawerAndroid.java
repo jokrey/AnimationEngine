@@ -1,16 +1,16 @@
 package util.animation.implementations.android.pipeline;
 
-class AnimationDrawerAndroid{} //remove, just for no errors
-//import android.graphics.Bitmap;
+class AnimationDrawerAndroid{} //remove, just so that no compile errors are shown, when compiling for desktop
 //import android.graphics.Color;
 //import android.graphics.Paint;
 //import android.graphics.RectF;
 //
-//import neural_network.abstract_logic.animation.implementations.android.display.AnimationView;
-//import neural_network.abstract_logic.animation.pipeline.AnimationDrawer;
-//import neural_network.abstract_logic.animation.neural_network.abstract_logic.AEColor;
-//import neural_network.abstract_logic.animation.neural_network.abstract_logic.AEPoint;
-//import neural_network.abstract_logic.animation.neural_network.abstract_logic.AERect;
+//import util.animation.implementations.android.display.AnimationView;
+//import util.animation.pipeline.AnimationDrawer;
+//import util.animation.util.AEColor;
+//import util.animation.util.AEImage;
+//import util.animation.util.AEPoint;
+//import util.animation.util.AERect;
 //
 //public class AnimationDrawerAndroid extends AnimationDrawer {
 //	public AnimationView p=null;
@@ -20,9 +20,9 @@ class AnimationDrawerAndroid{} //remove, just for no errors
 //    }
 //
 //
-//    @Override public void drawImage(Object param, AERect drawB) {
-//        Bitmap ip_img = (Bitmap) param;
-//        p.getDrawCanvas().drawBitmap(ip_img, null, new RectF((float)drawB.x, (float)drawB.y, (float)(drawB.x + drawB.w), (float)(drawB.y + drawB.h)), p.paint);
+//    @Override public void drawImage(AEImage param, AERect drawB) {
+////        Bitmap ip_img = (Bitmap) param;
+////        p.getDrawCanvas().drawBitmap(ip_img, null, new RectF((float)drawB.x, (float)drawB.y, (float)(drawB.x + drawB.w), (float)(drawB.y + drawB.h)), p.paint);
 //    }
 //
 //    @Override public void drawLine(AEColor param, AEPoint p1, AEPoint p2) {
