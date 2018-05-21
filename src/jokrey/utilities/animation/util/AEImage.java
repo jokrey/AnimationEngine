@@ -1,6 +1,6 @@
 package jokrey.utilities.animation.util;
 
-//TODO WORK IN PROGESS
+//TODO WORK IN PROGESS - NEVER USED IN A PRACTICAL APPLICATION
 public class AEImage {
     private final int[][] data;
     public AEImage(int[][] data) {
