@@ -8,6 +8,9 @@ public class AEColor {
 	public AEColor(int a, int r, int g, int b) {
 		argb = (a << 24) | (r << 16 ) | (g<<8) | b;
 	}
+	public AEColor(int r, int g, int b) {
+		this(255,r,g,b);
+	}
 	public int getAlpha() {
 		return 0xFF & (argb >> 24);
 	}
@@ -41,9 +44,9 @@ public class AEColor {
 		return new AEColor(getAlpha(), (int)(Math.min(255, getRed()*1.1)), (int)(Math.min(255, getGreen()*1.1)), (int) (Math.min(255, getBlue()*1.1)));
 	}
 
-
-
-
+	@Override public int hashCode() {
+		return Integer.hashCode(argb);
+	}
 
 	public static final AEColor WHITE = new AEColor(255, 255, 255, 255);
 	public static final AEColor RED = new AEColor(255, 255, 0, 0);

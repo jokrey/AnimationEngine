@@ -62,8 +62,7 @@ public class AnimationDrawerSwing extends AnimationDrawer {
         p.getLastGraphics().setColor(param==null?Color.black:new Color(param.getRed(), param.getGreen(), param.getBlue()));
         Graphics2D g2 = p.getLastGraphics();
         float fontSize = 20.0f;
-        Font font = new Font("Arial", Font.BOLD, 1000);
-        font = g2.getFont().deriveFont(fontSize);
+        Font font = g2.getFont().deriveFont(fontSize);
         int width = g2.getFontMetrics(font).stringWidth(str);
         fontSize = (float) ((rect.getWidth() / width ) * fontSize);
         font = g2.getFont().deriveFont(fontSize);

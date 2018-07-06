@@ -37,8 +37,8 @@ public class AnimationPipeline {
         for(AnimationObject ip:list) {
             if(ip!=null) {
                 AERect drawB = getDrawBoundsFor(ip);
-                if(!(//ip.getX()<0||ip.getY()<0||ip.getX()+ip.getW()>100||ip.getY()+ip.getH()>100 || //if the particle is not within the 100 x 100 map field -> NOT ONLY REDUNDANT, BUT UNNECESSARY (its a joke)
-                        !drawB.intersects(partOfDrawBoundsVisible))//if the particle would be visible if drawn - if not discard
+                if((//ip.getX()<0||ip.getY()<0||ip.getX()+ip.getW()>100||ip.getY()+ip.getH()>100 || //if the particle is not within the 100 x 100 map field -> NOT ONLY REDUNDANT, BUT UNNECESSARY (its a joke)
+                        drawB.intersects(partOfDrawBoundsVisible))//if the particle would be visible if drawn - if not discard
                         || ip.isLine()) {//lines would have to be handled differently, which is why we just draw them always
                     drawAnimationObject(ip, ip.drawParam);
                 }
