@@ -227,7 +227,7 @@ public class MovingAnimationObject extends AnimationObject {
 
     public boolean bounceCircleOfCircle(MovingAnimationObject o, double restitution) {
         if(collision(this, o)) {
-            System.out.println("");
+            System.out.println();
             System.out.println("----OLD----");
             System.out.println("vX: "+getV_X());
             System.out.println("vY: "+getV_Y());
@@ -257,7 +257,7 @@ public class MovingAnimationObject extends AnimationObject {
             System.out.println("----NEW----");
             System.out.println("vX: "+getV_X());
             System.out.println("vY: "+getV_Y());
-            System.out.println("");
+            System.out.println();
             return true;
         }
         return false;
@@ -348,31 +348,31 @@ public class MovingAnimationObject extends AnimationObject {
         return false;
     }
 
-    public boolean computeBoxStop(AERect bnds) {
-		boolean didSomeStoping = false;
-        int maxY = (int) (bnds.getHeight() - (int)getH());
-        int maxX = (int) (bnds.getWidth() - (int)getW());
+    public boolean computeInsideBoxStop(AERect box) {
+		boolean didSomeStopping = false;
+        int maxY = (int) (box.getHeight() - (int)getH());
+        int maxX = (int) (box.getWidth() - (int)getW());
         // Ball is out of bounds in Y dimension
         if (getY() > maxY) {
             setY(maxY);
             setV_Y(0);
-            didSomeStoping=true;
+            didSomeStopping=true;
         } else if (getY() < 0) {
         	setY(0);
             setV_Y(0);
-            didSomeStoping=true;
+            didSomeStopping=true;
         }
         // Ball is out of bounds in X dimension
         if (getX() > maxX) {
             setX(maxX);
             setV_X(0);
-            didSomeStoping=true;
+            didSomeStopping=true;
         } else if (getX() < 0) {
             setX(0);
             setV_X(0);
-            didSomeStoping=true;
+            didSomeStopping=true;
         }
-        return didSomeStoping;
+        return didSomeStopping;
     }
 
 	public boolean computeStops(List<? extends MovingAnimationObject> loadables) {

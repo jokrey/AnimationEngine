@@ -59,24 +59,30 @@ public class LimitRangeMovingAnimationObject extends MovingAnimationObject {
 		}
         for (int i = c_s.length-1; i!= 0; i--)if (rand.nextBoolean())drawParam=c_s[i];
 	}
-    public LimitRangeMovingAnimationObject(double x,double y,double vX,double vY,double fX,double fY,int width,int height,int shape_type,AEColor... c_s) {
+    public LimitRangeMovingAnimationObject(AnimationObject explBounds, double x,double y,double vX,double vY,double fX,double fY,int width,int height,int shape_type,AEColor... c_s) {
     	super(x,y,vX,vY,fX,fY,width,height,shape_type,c_s[0]);
+    	this.explBounds=explBounds;
     	Random rand = new Random();
         for (int i = c_s.length-1; i!= 0; i--)if (rand.nextBoolean())drawParam=c_s[i];
     }
-	public LimitRangeMovingAnimationObject(AEPoint p, AnimationObject explBounds, int angle, double v, double f, AEColor c) {
-		super(p.x, p.y, 0, 0, 0, 0, 0, 0, AnimationObject.OVAL, c);
+	public LimitRangeMovingAnimationObject(AEPoint p, AnimationObject explBounds, int angle, double v, double f, AEColor... c_s) {
+		super(p.x, p.y, 0, 0, 0, 0, 0, 0, AnimationObject.OVAL, null);
 		this.explBounds = explBounds;
 		Random rand = new Random();
-        double[] v_s = AE_UTIL.angleVelocityToXYVelocity(angle, v);
+		double[] v_s = AE_UTIL.angleVelocityToXYVelocity(angle, v);
 		setV_X(v_s[0]);
 		setV_Y(v_s[1]);
-        double[] f_s = AE_UTIL.angleVelocityToXYVelocity(angle, f);
+		double[] f_s = AE_UTIL.angleVelocityToXYVelocity(angle, f);
 		setF_X(f_s[0]);
 		setF_Y(f_s[1]);
-        setW(rand.nextInt(5)+3);
+		setW(rand.nextInt(5)+3);
 		setH(rand.nextInt(5)+3);
-    }
+		for (int i = c_s.length-1; i!= 0; i--)if (rand.nextBoolean())drawParam=c_s[i];
+	}
+	public LimitRangeMovingAnimationObject(AEPoint p, AnimationObject explBounds, double v_x, double v_y, AEColor c) {
+		super(p.x, p.y, v_x, v_y, 0, 0, 4, 4, AnimationObject.OVAL, c);
+		this.explBounds = explBounds;
+	}
 
 	public static List<LimitRangeMovingAnimationObject> getExplosion(AEPoint expl_loc, AnimationObject explBounds, int expl_size) {
 		List<LimitRangeMovingAnimationObject> explosionAnimationObjects = new ArrayList<>();
