@@ -71,7 +71,7 @@ class AnimationDrawerAndroid{} //remove, just so that no compile errors are show
 //        p.getDrawCanvas().drawOval(new RectF((float)drawB.x, (float)drawB.y, (float)(drawB.x + drawB.w), (float)(drawB.y + drawB.h)), p.paint);
 //    }
 //
-//    //TODO
+//
 //    @Override public void drawHalfOval(AEColor param, AERect aeRect, int openDirection) {
 ////        GraphicsContext gc = p.getGraphicsContext2D();
 ////        Color colorToDraw = param==null? Color.AQUA:Color.rgb(param.getRed(), param.getGreen(), param.getBlue());

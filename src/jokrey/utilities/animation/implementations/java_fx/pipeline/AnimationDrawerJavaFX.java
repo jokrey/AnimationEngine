@@ -33,7 +33,7 @@ public class AnimationDrawerJavaFX extends AnimationDrawer {
 
 
     @Override public void drawImage(AEImage param, AERect drawB) {
-        //TODO: I assume this is slow as -------
+        //TODO: I assume this is slow as -------(professionally bleeped by the Association for Standards, Censorship and Propaganda)
         int w = param.getData().length;
         int h = param.getData()[0].length;
         WritableImage image = new WritableImage(w, h);
