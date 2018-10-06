@@ -2,6 +2,7 @@ package jokrey.utilities.animation.engine;
 
 public abstract class TickEngine extends AnimationEngine {
     private long last = System.nanoTime();
+    private long tick_counter = 0;
     public final void calculate() {
         if(isPaused()) {
             last = System.nanoTime();
@@ -16,6 +17,7 @@ public abstract class TickEngine extends AnimationEngine {
         if(delta > tickEvery) {
             do {
                 calculateTick();
+                tick_counter++;
                 delta-=tickEvery;
             } while(delta > tickEvery && redoDelayedTicks());
             return true;
@@ -23,6 +25,12 @@ public abstract class TickEngine extends AnimationEngine {
         return false;
     }
     protected abstract void calculateTick();
+    public final long getCurrentTick() {
+        return tick_counter;
+    }
+
+    //allow override
     public int getTicksPerSecond() {return 100;}
     public boolean redoDelayedTicks() {return true;}
+
 }
