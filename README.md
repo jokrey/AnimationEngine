@@ -17,7 +17,7 @@ Simply have one class extend any of the available engine's(depending on what fun
 Then start it with either the Swing or the JavaFX starter or set the AnimationView as ContentView on Android.
 For a more detailed explanation:
 * See the java doc commentary on the api itself.
-* (If I didn't come around to writing that commentary yet see the EvadeGame implementation repo's)
+* (If I didn't come around to writing that commentary yet see the EvadeGame or AGameOfLife implementation repo's)
 
 ## License
 
