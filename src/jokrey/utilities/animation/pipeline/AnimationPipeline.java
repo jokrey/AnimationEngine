@@ -180,14 +180,14 @@ public class AnimationPipeline {
 
     AERect currentDrawBounds=null;
     public AERect getDrawBoundsFor(AnimationObject ib) {
-        int drawX = (int)(ib.getX()*squareEqualsPixels);
-        int drawY = (int)(ib.getY()*squareEqualsPixels);
+        double drawX = ib.getX()*squareEqualsPixels;
+        double drawY = ib.getY()*squareEqualsPixels;
         if(currentDrawBounds!=null) {
             drawX += currentDrawBounds.x;
             drawY += currentDrawBounds.y;
         }
-        int drawW = (int)(ib.getW()*squareEqualsPixels);
-        int drawH = (int)(ib.getH()*squareEqualsPixels);
+        double drawW = ib.getW()*squareEqualsPixels;
+        double drawH = ib.getH()*squareEqualsPixels;
         return new AERect(drawX,drawY,drawW,drawH);
     }
 
