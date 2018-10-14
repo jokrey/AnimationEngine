@@ -35,9 +35,10 @@ public class AnimationDrawerSwing extends AnimationDrawer {
                 0, 0, image.getWidth(), image.getHeight(), null);
     }
 
-    @Override public void drawLine(AEColor param, AEPoint p1, AEPoint p2) {
+    @Override public void drawLine(AEColor param, AEPoint p1, AEPoint p2, float size) {
         p.getLastGraphics().setColor(param==null?Color.black:new Color(param.getRed(), param.getGreen(), param.getBlue()));
-        p.getLastGraphics().setStroke(new BasicStroke(2f));
+        if(size!=1)
+            p.getLastGraphics().setStroke(new BasicStroke(size));
         p.getLastGraphics().drawLine((int)p1.x, (int)p1.y, (int)p2.x, (int)p2.y);
     }
 

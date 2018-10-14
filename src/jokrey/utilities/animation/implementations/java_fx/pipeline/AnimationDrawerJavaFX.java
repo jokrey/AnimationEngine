@@ -47,12 +47,16 @@ public class AnimationDrawerJavaFX extends AnimationDrawer {
         gc.drawImage(image, drawB.x, drawB.y, drawB.getWidth(), drawB.getHeight());//scaled drawing not tested...
     }
 
-    @Override public void drawLine(AEColor param, AEPoint p1, AEPoint p2) {
+    @Override public void drawLine(AEColor param, AEPoint p1, AEPoint p2, float size) {
         GraphicsContext gc = p.getGraphicsContext2D();
 	    Color colorToDraw = param==null? Color.AQUA:Color.rgb(param.getRed(), param.getGreen(), param.getBlue());
 		gc.setStroke(colorToDraw);
 		gc.strokeLine(p1.x, p1.y, p2.x, p2.y);
-		gc.strokeLine(p1.x+1, p1.y+1, p2.x+1, p2.y+1);//a really stupid way to do stroke width == 2
+		if(size>1) {//a really stupid way to do stroke width == 2
+            size--;
+		    for(;size>0;size--)
+                gc.strokeLine(p1.x+size, p1.y+size, p2.x+size, p2.y+size);
+        }
     }
 
     @Override public void fillOval(AEColor param, AERect drawB) {

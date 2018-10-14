@@ -8,7 +8,10 @@ import jokrey.utilities.animation.util.AERect;
 public abstract class AnimationDrawer {
     protected abstract AERect getPanelBoundsOnScreen();
 
-    public abstract void drawLine(AEColor colorToDraw, AEPoint p1, AEPoint p2);
+    public void drawLine(AEColor colorToDraw, AEPoint p1, AEPoint p2) {
+        drawLine(colorToDraw, p1, p2, 1);
+    }
+    public abstract void drawLine(AEColor colorToDraw, AEPoint p1, AEPoint p2, float size);
     public abstract void fillRect(AEColor colorToDraw, AERect drawB);
     public abstract void drawRect(AEColor colorToDraw, AERect aeRect);
     public abstract void fillOval(AEColor colorToDraw, AERect drawB);
@@ -21,17 +24,4 @@ public abstract class AnimationDrawer {
     public abstract double drawString(AEColor clr, double font_size, String str, double mid_x, double mid_y);
     public abstract void drawString(AEColor clr, String str, AERect rect);
     public abstract void drawImage(AEImage toDrawer, AERect drawB);
-
-
-//	public int getVisibleW() {
-//		int visW = (int) ((pixelSize.getW())/squareEqualsPixels);
-//		return visW<=0?1:visW;
-//	}
-//	public int getVisibleH() {
-//		int visH= (int) ((pixelSize.getH())/squareEqualsPixels);
-//		return visH<=0?1:visH;
-//	}
-//	public AESize getVisibleS() {
-//		return new AESize(getVisibleW(), getVisibleH());
-//	}
 }
