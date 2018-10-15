@@ -9,22 +9,22 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Swing_FullScreenStarter {
-    public static JFrame start(AnimationEngine engineToRun_g) {
-        return start(engineToRun_g, true);
+    public static JFrame start(AnimationEngine engine) {
+        return start(engine, true);
     }
-    public static JFrame start(AnimationEngine engineToRun_g, boolean immediatlysetvisibletrue) {
-        return start(engineToRun_g, new AnimationPipeline(new AnimationDrawerSwing()), immediatlysetvisibletrue);
+    public static JFrame start(AnimationEngine engine, boolean immediatlysetvisibletrue) {
+        return start(engine, new AnimationPipeline(new AnimationDrawerSwing()), immediatlysetvisibletrue);
     }
-    public static JFrame start(AnimationEngine engineToRun, AnimationPipeline pipe_g) {
-        return start(engineToRun, pipe_g, true);
+    public static JFrame start(AnimationEngine engine, AnimationPipeline pipe) {
+        return start(engine, pipe, true);
     }
-	public static JFrame start(AnimationEngine engineToRun, AnimationPipeline pipe_g, boolean immediatlysetvisibletrue) {
-        if(! (pipe_g.getDrawer() instanceof AnimationDrawerSwing))
+	public static JFrame start(AnimationEngine engine, AnimationPipeline pipe, boolean immediatlysetvisibletrue) {
+        if(! (pipe.getDrawer() instanceof AnimationDrawerSwing))
             throw new IllegalArgumentException("Swing needs the swing drawer you f***");
 
 		JFrame f = new JFrame();
 
-		AnimationJPanel ap = new AnimationJPanel(engineToRun, pipe_g);
+		AnimationJPanel ap = new AnimationJPanel(engine, pipe);
 		ap.setBackground(Color.red);
 		f.add(ap, BorderLayout.CENTER);
 
