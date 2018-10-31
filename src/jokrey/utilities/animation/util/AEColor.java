@@ -21,7 +21,7 @@ public class AEColor {
 		return 0xFF & (argb >> 8);
 	}
 	public int getBlue() {
-		return 0xFF & (argb >> 0);
+		return 0xFF & argb;  //  0xFF & (argb >> 0)
 	}
 	public static AEColor getRandomColor() {
 		return new AEColor(AE_UTIL.getRandomNr((long)Integer.MIN_VALUE, (long)Integer.MAX_VALUE));
