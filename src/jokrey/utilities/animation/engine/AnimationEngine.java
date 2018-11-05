@@ -41,7 +41,7 @@ public abstract class AnimationEngine extends HandelableEngine {
 		return objects;
 	}
 
-	//to be overriden if felt neccs
+	//to be overridden if felt neccs
 	public List<AnimationObject> getAllObjectsToDraw() {
 		return getAllObjects();
 	}
@@ -64,8 +64,8 @@ public abstract class AnimationEngine extends HandelableEngine {
 		if(!pressedKeyCodes.contains(key_code))	pressedKeyCodes.add(key_code);
     }
     public void keyReleased(char keyChar, int key_code) {
-		pressedKeys.remove(pressedKeys.indexOf(keyChar));
-		pressedKeyCodes.remove(pressedKeyCodes.indexOf(key_code));
+		pressedKeys.remove(keyChar);
+		pressedKeyCodes.remove(key_code);
     }
 	public boolean isKeyPressed(char keyChar) {
 		return pressedKeys.contains(keyChar);
