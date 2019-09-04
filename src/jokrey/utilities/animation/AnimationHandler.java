@@ -2,6 +2,8 @@ package jokrey.utilities.animation;
 
 import jokrey.utilities.animation.pipeline.AnimationPipeline;
 import jokrey.utilities.animation.engine.AnimationEngine;
+import jokrey.utilities.animation.util.AEPoint;
+import jokrey.utilities.animation.util.AERect;
 
 import java.util.ConcurrentModificationException;
 
@@ -34,26 +36,51 @@ public abstract class AnimationHandler implements Runnable {
 	public void pause() {
 		engine.pause();
 	}
-	public void zoomIn() {
-		getPipeline().squareEqualsPixels+= getPipeline().squareEqualsPixels*0.02;
-
-		//TODO zoom in on mouse
-//		drawBounds=getDrawBounds(possibleDrawAreaSize);
-//		keepInRatioP.setLocation(keepInRatioP.x-drawBounds.x, keepInRatioP.y-drawBounds.y);
-//		int size = getSize(possibleDrawAreaSize);
-//		size = size+sizeChange;
-//    	if (size<100) size=100;
-//    	if(!new Rectangle(drawBounds.width, drawBounds.height).contains(keepInRatioP))
-//    		keepInRatioP=new Point(getSize(possibleDrawAreaSize)/2, getSize(possibleDrawAreaSize)/2);
-//        double oldRelativeLoc_x = keepInRatioP.getX()/(getSize(possibleDrawAreaSize)/10000000.0);
-//        double oldRelativeLoc_y = keepInRatioP.getY()/(getSize(possibleDrawAreaSize)/10000000.0);
-//        double newMouse_x = oldRelativeLoc_x*(size/10000000.0);
-//        double newMouse_y = oldRelativeLoc_y*(size /10000000.0);
-//        drawBounds.setLocation((int)(getDrawX(possibleDrawAreaSize)+(keepInRatioP.getX()-newMouse_x)), (int) (getDrawY(possibleDrawAreaSize)+(keepInRatioP.getY()-newMouse_y)));
-//        drawBounds.setSize(size,size);
+	public void zoomIn(AEPoint on) {
+		zoomTo(on, getPipeline().squareEqualsPixels+getPipeline().squareEqualsPixels*0.02);
 	}
-	public void zoomOut() {
-		getPipeline().squareEqualsPixels-= getPipeline().squareEqualsPixels*0.02;
+
+	public void zoomOut(AEPoint on) {
+		zoomTo(on, getPipeline().squareEqualsPixels-getPipeline().squareEqualsPixels*0.02);
+	}
+
+	private void zoomTo(AEPoint on, double squareEqualsPixels) {
+		AERect previousDrawBounds = getPipeline().getDrawBounds(engine);
+		AEPoint onDrawArea = new AEPoint(on.x-previousDrawBounds.x, on.y-previousDrawBounds.y);
+
+		if(getPipeline().userDrawBoundsMidOverride==null) {
+			if (engine.getDrawerMidOverride() == null)
+				getPipeline().userDrawBoundsMidOverride = getPipeline().convertFromPixelPoint(new AEPoint(previousDrawBounds.x + previousDrawBounds.getWidth() / 2, previousDrawBounds.y + previousDrawBounds.getHeight() / 2));
+			else
+				getPipeline().userDrawBoundsMidOverride = engine.getDrawerMidOverride();
+		}
+		AEPoint midOvBeforeInPixelCoords = getPipeline().convertToPixelPoint(getPipeline().userDrawBoundsMidOverride);
+
+		getPipeline().squareEqualsPixels= squareEqualsPixels;
+
+		AERect afterDrawBounds = getPipeline().getDrawBounds(engine);
+		double xDiff = previousDrawBounds.x - afterDrawBounds.x;
+		double yDiff = previousDrawBounds.y - afterDrawBounds.y;
+		midOvBeforeInPixelCoords = new AEPoint(midOvBeforeInPixelCoords.x - xDiff, midOvBeforeInPixelCoords.y - yDiff);
+		getPipeline().userDrawBoundsMidOverride = getPipeline().convertFromPixelPoint(midOvBeforeInPixelCoords);
+
+
+		int oldWidth = (int) previousDrawBounds.w;
+		int oldHeight = (int) previousDrawBounds.h;
+		int newWidth = (int) afterDrawBounds.w;
+		int newHeight = (int) afterDrawBounds.h;
+
+		double oldRelativeLoc_x = (onDrawArea.getX()/((double)oldWidth/100000000.0));
+		double oldRelativeLoc_y = (onDrawArea.getY()/((double)oldHeight/100000000.0));
+		double newMouse_x =  (oldRelativeLoc_x*(newWidth/100000000.0));
+		double newMouse_y =  (oldRelativeLoc_y*(newHeight/100000000.0));
+
+		double newLocationX = xDiff + (onDrawArea.getX() - newMouse_x );
+		double newLocationY = yDiff + (onDrawArea.getY() - newMouse_y );
+
+		getPipeline().userDrawBoundsMidOverride = getPipeline().convertFromPixelPoint(new AEPoint(
+				getPipeline().getPixelSize().getWidth()/2 - newLocationX,
+				getPipeline().getPixelSize().getHeight()/2 - newLocationY));
 	}
 
 	public AnimationHandler(AnimationEngine engineToRun, AnimationPipeline pipeline) {

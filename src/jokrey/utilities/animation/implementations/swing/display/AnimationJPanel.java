@@ -90,9 +90,9 @@ public class AnimationJPanel extends JPanel {
 			@Override public void mouseWheelMoved(MouseWheelEvent mwe) {
 				if(handler.getEngine().isKeyPressed(KeyEvent.VK_CONTROL)) {
 					if (mwe.getWheelRotation() < 0) {
-						handler.zoomIn();
+						handler.zoomIn(new AEPoint(mwe.getX(), mwe.getY()));
 					} else if (mwe.getWheelRotation() > 0) {
-						handler.zoomOut();
+						handler.zoomOut(new AEPoint(mwe.getX(), mwe.getY()));
 					}
 				}
 			}
