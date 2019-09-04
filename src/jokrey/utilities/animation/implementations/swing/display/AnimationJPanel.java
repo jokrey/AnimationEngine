@@ -67,7 +67,6 @@ public class AnimationJPanel extends JPanel {
 									handler.getPipeline().userDrawBoundsMidOverride.y - convert.y / handler.getPipeline().squareEqualsPixels
 							);
 						}
-						//System.out.println(handler.getPipeline().userDrawBoundsMidOverride);
 					}
 				}
 			}
@@ -108,9 +107,7 @@ public class AnimationJPanel extends JPanel {
 	                    	handler.getEngine().keyPressed(ke.getKeyChar(), ke.getKeyCode());
 	                        break;
 	                    case KeyEvent.KEY_RELEASED:
-	                    	try {
-		                    	handler.getEngine().keyReleased(ke.getKeyChar(), ke.getKeyCode());
-	                    	} catch(Exception ex) {}
+							handler.getEngine().keyReleased(ke.getKeyChar(), ke.getKeyCode());
 	                        break;
                     }
                     return false;

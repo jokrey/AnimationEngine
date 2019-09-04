@@ -64,8 +64,8 @@ public abstract class AnimationEngine extends HandelableEngine {
 		if(!pressedKeyCodes.contains(key_code))	pressedKeyCodes.add(key_code);
     }
     public void keyReleased(char keyChar, int key_code) {
-		pressedKeys.remove(keyChar);
-		pressedKeyCodes.remove(key_code);
+		pressedKeys.remove(Character.valueOf(keyChar));
+		pressedKeyCodes.remove(Integer.valueOf(key_code));
     }
 	public boolean isKeyPressed(char keyChar) {
 		return pressedKeys.contains(keyChar);

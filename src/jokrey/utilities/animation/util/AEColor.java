@@ -56,4 +56,5 @@ public class AEColor {
 	public static final AEColor BLACK = new AEColor(255, 0, 0, 0);
 	public static final AEColor CYAN = new AEColor(255, 0, 255, 255);
 	public static final AEColor ORANGE = new AEColor(255, 255, 155, 0);
+	public static final AEColor GREEN = new AEColor(255, 0, 255, 0);
 }
