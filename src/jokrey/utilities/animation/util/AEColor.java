@@ -24,7 +24,7 @@ public class AEColor {
 		return 0xFF & argb;  //  0xFF & (argb >> 0)
 	}
 	public static AEColor getRandomColor() {
-		return new AEColor(AE_UTIL.getRandomNr((long)Integer.MIN_VALUE, (long)Integer.MAX_VALUE));
+		return new AEColor(AE_UTIL.getRandomNr(Integer.MIN_VALUE, Integer.MAX_VALUE));
 	}
 	public static AEColor getRandomColor(int small, int high) {
 		return new AEColor(255, AE_UTIL.getRandomNr(small, high), AE_UTIL.getRandomNr(small, high), AE_UTIL.getRandomNr(small, high));
@@ -57,4 +57,9 @@ public class AEColor {
 	public static final AEColor CYAN = new AEColor(255, 0, 255, 255);
 	public static final AEColor ORANGE = new AEColor(255, 255, 155, 0);
 	public static final AEColor GREEN = new AEColor(255, 0, 255, 0);
+	public static final AEColor LIGHT_BLUE = new AEColor(255, 173, 216, 230);
+	public static final AEColor BLUE = new AEColor(255, 0, 0, 255);
+	public static final AEColor YELLOW = new AEColor(255, 255,255,0);
+	public static final AEColor MAROON = new AEColor(255, 128,0,0);
+	public static final AEColor CRIMSON = new AEColor(255, 220,20,60);
 }

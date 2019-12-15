@@ -233,6 +233,45 @@ public class AnimationObject {
 		return Math.sqrt(((p1.x - p2.x) * (p1.x - p2.x)) + ((p1.y - p2.y) * (p1.y - p2.y)));
 	}
 
+	//FROM:: https://stackoverflow.com/a/6853926
+	public static double distance(AEPoint point, AnimationObject line) {
+		if(!line.isLine()) throw new IllegalArgumentException("arg1(line) has to be a line");
+		double x = point.x;
+		double y = point.y;
+		double x1 = line.getX();
+		double y1 = line.getY();
+		double x2 = line.getW();
+		double y2 = line.getH();
+
+		double A = x - x1;
+		double B = y - y1;
+		double C = x2 - x1;
+		double D = y2 - y1;
+
+		double dot = A * C + B * D;
+		double len_sq = C * C + D * D;
+		double param = -1;
+		if (len_sq != 0) //in case of 0 length line
+			param = dot / len_sq;
+
+		double xx, yy;
+
+		if (param < 0) {
+			xx = x1;
+			yy = y1;
+		} else if (param > 1) {
+			xx = x2;
+			yy = y2;
+		} else {
+			xx = x1 + param * C;
+			yy = y1 + param * D;
+		}
+
+		double dx = x - xx;
+		double dy = y - yy;
+		return Math.sqrt(dx * dx + dy * dy);
+	}
+
 //COLLISION DETECTION
 	public static boolean intersect(AnimationObject p, AnimationObject o) {
 		return p!=null && o!=null && p.getBounds().intersects(o.getBounds());

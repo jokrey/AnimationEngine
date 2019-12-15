@@ -16,12 +16,12 @@ public abstract class AnimationEngine extends HandelableEngine {
 			return objects.get(index);
 		return null;
 	}
-	public final void initateObjectAt(int index, AnimationObject ao) {
+	public final void initiateObjectAt(int index, AnimationObject ao) {
 		while(objects.size()<=index)
 			objects.add(null);
 		objects.set(index, ao);
 	}
-	public final void initateNewObject(AnimationObject ao) {
+	public final void initiateNewObject(AnimationObject ao) {
 		objects.add(ao);
 	}
 	public final void clearObjects() {
